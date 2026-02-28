@@ -2,7 +2,7 @@ using UnityEngine;
 
 //Node class is used to create a grid that checks if the player can walk on that
 //grid or not and stores the world position of that grid.
-public class Node
+public class Node : IHeapItem<Node>
 {
     public bool walkable;
     public Vector3 worldPosition;
@@ -11,6 +11,7 @@ public class Node
     public int gCost;
     public int hCost;
     public Node parent;
+    private int heapIndex;
 
     //Constructor for the Node class that takes in a boolean value for walkable and a Vector3 for world position.
     public Node(bool _walkable, Vector3 _worldPosition , int _gridX, int _gridY)
@@ -24,5 +25,29 @@ public class Node
     public int fCost
     {
         get { return gCost + hCost; }
+    }
+
+    public int CompareTo(Node nodeToCompare)
+    {
+        int compare = fCost.CompareTo(nodeToCompare.fCost);
+        if (compare == 0)
+        {
+            compare = hCost.CompareTo(nodeToCompare.hCost);
+        }
+
+        return -compare;
+    }
+
+    public int HeapIndex 
+    {
+        get
+        {
+            return heapIndex;
+        }
+        set
+        {
+            heapIndex = value;
+
+        }
     }
 }
