@@ -8,18 +8,20 @@ public class Node : IHeapItem<Node>
     public Vector3 worldPosition;
     public int gridX;
     public int gridY;
+    public int movementPenalty;
     public int gCost;
     public int hCost;
     public Node parent;
     private int heapIndex;
 
     //Constructor for the Node class that takes in a boolean value for walkable and a Vector3 for world position.
-    public Node(bool _walkable, Vector3 _worldPosition , int _gridX, int _gridY)
+    public Node(bool _walkable, Vector3 _worldPosition , int _gridX, int _gridY, int _movementPenalty)
     {
         walkable = _walkable;
         worldPosition = _worldPosition;
         gridX = _gridX;
         gridY = _gridY;
+        movementPenalty = _movementPenalty;
     }
     
     public int fCost
@@ -47,7 +49,6 @@ public class Node : IHeapItem<Node>
         set
         {
             heapIndex = value;
-
         }
     }
 }
